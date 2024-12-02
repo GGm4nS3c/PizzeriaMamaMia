@@ -9,7 +9,7 @@ const Navbar = () => {
   const token = false;
 
   return (
-    <nav className=" bg-white border-gray-200 dark:bg-gray-800  m-1 rounded-lg ">
+    <nav className=" bg-white border-gray-200 dark:bg-gray-800 m-1 rounded-lg">
       <div className="flex w-full justify-between">
         <div className="max-w-screen-xl flex items-center p-4">
           <h5 className=" text-white text-sm p-2">Pizzeria Mama Mia!</h5>
