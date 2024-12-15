@@ -11,7 +11,7 @@ export const validateFields = (email, pass1, pass2) => {
       return "Las contraseñas no cumplen la longitud";
     }
   
-    return "Datos OK";
+    return "Registro Exitoso";
   };
   
   export const validateFieldsLogin = (email, pass) => {

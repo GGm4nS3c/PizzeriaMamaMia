@@ -1,29 +1,25 @@
 import CardPizza from "../components/CardPizza";
 import Header from "./components/Header";
+import { pizzas } from "../data/pizzas";
 
 function Home() {
   return (
     <>
       <Header></Header>
-      <div className="flex justify-center gap-5 ">
-      <CardPizza 
-        name="Napolitana"
-        price={5950}
-        ingredients={["mozzarella", "tomates", "jamón", "orégano"]}
-        img="./public/assets/img/napolitan.webp"
-      />
-      <CardPizza
-        name="Española"
-        price={6950}
-        ingredients={["mozzarella", "gorgonzola", "parmesano", "provolone"]}
-        img="/public/assets/img/spanish.webp"
-      />
-      <CardPizza
-        name="Pepperoni"
-        price={6950}
-        ingredients={["mozzarella", "pepperoni", "orégano"]}
-        img="/public/assets/img/peperoni.webp"
-      />
+      <div className="flex justify-center p-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+          {pizzas.map((pizza, index) => {
+            return (
+              <CardPizza
+                key={index}
+                name={pizza.name}
+                price={pizza.price}
+                ingredients={pizza.ingredients}
+                img={pizza.img}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
