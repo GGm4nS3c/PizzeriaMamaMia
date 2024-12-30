@@ -2,18 +2,18 @@
 import { formatter } from "../utils/formatter";
 import { FcReading, FcPaid } from "react-icons/fc";
 
-function CardPizza({ name, price, ingredients, img }) {
+function CardPizza({ pizza }) {
   return (
     <>
-      <div className="max-w-sm  rounded-lg shadow bg-gray-800">
+      <div className="max-w-sm rounded-lg shadow bg-gray-800">
         <a className="w-50 h-50" href="#">
-          <img className="p-3 rounded-full" src={img} alt="Card-img" />
+          <img className="p-3 rounded-full" src={pizza.img} alt="Card-img" />
         </a>
 
         <div className="p-5">
           <a href="#">
             <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {name}
+              {pizza.name}
             </h5>
           </a>
 
@@ -21,14 +21,14 @@ function CardPizza({ name, price, ingredients, img }) {
             <h5>Ingredientes:</h5>
 
             <ul>
-              {ingredients.map((ingredient, index) => {
+              {pizza.ingredients.map((ingredient, index) => {
                 return <li key={index}>{ingredient}</li>;
               })}
             </ul>
           </div>
 
           <h6 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {"Precio: $" + formatter(price)}
+            {"Precio: $" + formatter(pizza.price)}
           </h6>
 
           <div className="flex justify-between gap-3 align-baseline">

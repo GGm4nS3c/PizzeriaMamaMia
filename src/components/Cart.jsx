@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { pizzaCart } from "../data/pizzas";
 import { formatter } from "../utils/formatter";
+
 const Cart = () => {
   const [currentCart, setCurrentCart] = useState(pizzaCart);
   const total = currentCart.reduce(
@@ -18,10 +19,12 @@ const Cart = () => {
     setCurrentCart([...currentCart.filter((pizza) => pizza.count > 0)]);
     console.log(currentCart);
   };
+
   return (
     <>
       <div className="flex flex-col items-center text-lg font-medium text-gray-900 p-3 m-5 ">
         <h1>Detalles del pedido:</h1>
+
         <ul className="p-5 rounded-3xl bg-gray-300">
           {currentCart.map((pizza, index) => {
             return (
@@ -58,6 +61,8 @@ const Cart = () => {
             );
           })}
         </ul>
+
+
         <h1>Total del pedido: ${formatter(total)}</h1>
       </div>
     </>
@@ -65,3 +70,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
