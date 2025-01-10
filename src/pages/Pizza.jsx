@@ -37,12 +37,12 @@ function Pizza() {
       ) : (
         <div className="max-w-lg mx-auto text-center flex flex-col justify-center items-center rounded-lg  bg-gray-800">
           <a className="h-auto object-contain" href="#">
-            <img className="p-3 w-full h-full object-cover rounded-lg" src={pizzaItem.img} alt="Card-img" />
+            <img className="p-2 w-full h-full rounded-3xl" src={pizzaItem.img} alt="Card-img" />
           </a>
 
           <div className="p-5">
             <a href="#">
-              <h5 className="mb-4 text-2xl font-bold tracking-tight  text-gray-900 dark:text-white">
+              <h5 className="mb-4 text-2xl font-bold tracking-tight  text-gray-900 dark:text-green-600 ">
                 {pizzaItem.name}
               </h5>
             </a>

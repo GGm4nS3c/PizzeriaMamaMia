@@ -7,12 +7,12 @@ function CardPizza({ pizza }) {
     <>
       <div className="max-w-sm rounded-lg shadow bg-gray-800">
         <a className="w-50 h-50" href="#">
-          <img className="p-3 rounded-full" src={pizza.img} alt="Card-img" />
+          <img className="p-3 rounded-lg" src={pizza.img} alt="Card-img" />
         </a>
 
         <div className="p-5">
           <a href="#">
-            <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-4 text-2xl font-bold tracking-tight text-green-200 dark:text-green-600 text-center">
               {pizza.name}
             </h5>
           </a>

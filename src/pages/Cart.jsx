@@ -22,10 +22,10 @@ const Cart = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center text-lg font-medium text-gray-900 p-3 m-5 ">
-        <h1>Detalles del pedido:</h1>
+      <div className="flex flex-col items-center  text-green-700 font-bold font-medium p-3 m-5 ">
+        <h1 className="text-3xl">Detalles del pedido:</h1>
 
-        <ul className="p-5 rounded-3xl bg-gray-300">
+        <ul className="p-5 rounded-3xl bg-gray-800 text-gray-300 text m-3">
           {currentCart.map((pizza, index) => {
             return (
               <li
@@ -34,17 +34,17 @@ const Cart = () => {
               >
                 <a className="" href="#">
                   <img
-                    className="h-auto max-w-20 transition-all"
+                    className="h-auto max-w-20 transition-all rounded-lg"
                     src={pizza.img}
-                    alt="pizzaimg"
+                    alt={pizza.name}
                   />
                 </a>
 
-                <span>{pizza.name}</span>
+                <span className="text-green-700">{pizza.name}</span>
 
                 <span>${pizza.price}</span>
                 <button
-                  className="bg-green-500 h-8 w-8"
+                  className="bg-green-700 h-8 w-8"
                   onClick={() => handleAdd(index)}
                 >
                   +
@@ -52,7 +52,7 @@ const Cart = () => {
 
                 <span>{pizza.count}</span>
                 <button
-                  className="bg-red-500 h-8 w-8"
+                  className="bg-red-700 h-8 w-8"
                   onClick={() => handleDel(index)}
                 >
                   -
@@ -62,12 +62,10 @@ const Cart = () => {
           })}
         </ul>
 
-
-        <h1>Total del pedido: ${formatter(total)}</h1>
+        <h1 className="text-green-700">Total del pedido: ${formatter(total)}</h1>
       </div>
     </>
   );
 };
 
 export default Cart;
-
