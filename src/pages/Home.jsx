@@ -35,7 +35,6 @@ function Home() {
         {error ? (
             <p className="text-red-500">Error: {error.message}</p>
           ) : (
-            // Mostrar las pizzas si no hay error
             pizzasData.map((pizza) => (
               <CardPizza key={pizza.id} pizza={pizza} />
             ))

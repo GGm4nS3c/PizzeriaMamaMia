@@ -20,3 +20,6 @@ Asegúrate de tener instalado:
     npm install
 3.  Inicia el servidor de desarrollo:
     npm run dev
+4. Inicia la api que contiene la data de pizzas
+    cd api
+    npm start

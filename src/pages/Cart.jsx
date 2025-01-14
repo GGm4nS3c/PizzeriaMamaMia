@@ -1,70 +1,60 @@
-import { useState } from "react";
-import { pizzaCart } from "../data/pizzas";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 import { formatter } from "../utils/formatter";
 
 const Cart = () => {
-  const [currentCart, setCurrentCart] = useState(pizzaCart);
-  const total = currentCart.reduce(
-    (acc, pizza) => acc + pizza.price * pizza.count,
-    0
-  );
+  const { currentCart, setCurrentCart, total } = useContext(CartContext);
 
-  const handleAdd = (index) => {
-    currentCart[index].count++;
-    setCurrentCart([...currentCart]);
-    console.log(currentCart);
+  const handleAdd = (id) => {
+    const updatedCart = currentCart.map((pizza) =>
+      pizza.id === id ? { ...pizza, count: pizza.count + 1 } : pizza
+    );
+    setCurrentCart(updatedCart);
   };
-  const handleDel = (index) => {
-    currentCart[index].count--;
-    setCurrentCart([...currentCart.filter((pizza) => pizza.count > 0)]);
-    console.log(currentCart);
+
+  const handleDel = (id) => {
+    const updatedCart = currentCart
+      .map((pizza) =>
+        pizza.id === id ? { ...pizza, count: pizza.count - 1 } : pizza
+      )
+      .filter((pizza) => pizza.count > 0); 
+    setCurrentCart(updatedCart);
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center  text-green-700 font-bold font-medium p-3 m-5 ">
-        <h1 className="text-3xl">Detalles del pedido:</h1>
-
-        <ul className="p-5 rounded-3xl bg-gray-800 text-gray-300 text m-3">
-          {currentCart.map((pizza, index) => {
-            return (
-              <li
-                className="p-5 m-5 border border-gray-800 flex justify-between gap-10"
-                key={index}
-              >
-                <a className="" href="#">
-                  <img
-                    className="h-auto max-w-20 transition-all rounded-lg"
-                    src={pizza.img}
-                    alt={pizza.name}
-                  />
-                </a>
-
-                <span className="text-green-700">{pizza.name}</span>
-
-                <span>${pizza.price}</span>
-                <button
-                  className="bg-green-700 h-8 w-8"
-                  onClick={() => handleAdd(index)}
-                >
-                  +
-                </button>
-
-                <span>{pizza.count}</span>
-                <button
-                  className="bg-red-700 h-8 w-8"
-                  onClick={() => handleDel(index)}
-                >
-                  -
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-
-        <h1 className="text-green-700">Total del pedido: ${formatter(total)}</h1>
-      </div>
-    </>
+    <div className="flex flex-col items-center text-green-700 font-medium p-3 m-5">
+      <h1 className="text-3xl">Detalles del pedido:</h1>
+      <ul className="p-5 rounded-3xl bg-gray-800 text-gray-300 text m-3">
+        {currentCart.map((pizza) => (
+          <li
+            className="p-5 m-5 border border-gray-800 flex justify-between gap-10"
+            key={pizza.id}
+          >
+            <img
+              className="h-auto max-w-20 transition-all rounded-lg"
+              src={pizza.img}
+              alt={pizza.name}
+            />
+            <span className="text-green-700">{pizza.name}</span>
+            <span>${pizza.price}</span>
+            <button
+              className="bg-green-700 h-8 w-8"
+              onClick={() => handleAdd(pizza.id)} 
+            >
+              +
+            </button>
+            <span>{pizza.count}</span>
+            <button
+              className="bg-red-700 h-8 w-8"
+              onClick={() => handleDel(pizza.id)}
+            >
+              -
+            </button>
+          </li>
+        ))}
+      </ul>
+      <h1 className="text-green-700">Total del pedido: ${formatter(total)}</h1>
+    </div>
   );
 };
 

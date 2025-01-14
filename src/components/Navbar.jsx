@@ -4,9 +4,11 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { IoMdLogOut } from "react-icons/io";
 import { FaRegUser, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
-  const total = 25000;
+  const { total } = useContext(CartContext);
   const token = true;
 
   return (
@@ -54,9 +56,9 @@ const Navbar = () => {
           )}
         </div>
         <Link to="/Cart">
-          <button className="gap-1 p-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+          <button className="gap-1 p-5 m-2 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
             <FaCartShopping />
-            <button>${formatter(total)}</button>
+            <span>${formatter(total)}</span>
           </button>
         </Link>
       </div>
