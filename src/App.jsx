@@ -9,11 +9,14 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import NotFound from "./pages/NotFound";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import CartProvider from "./context/CartContext";
+import { useContext } from "react";
+import { UserContext } from "./context/UserContext";
 
 function App() {
+  const {tokenStatus} = useContext(UserContext);
   return (
     <>
       <CartProvider>
@@ -22,11 +25,14 @@ function App() {
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/Login"  element={tokenStatus ? (<Navigate to="/Profile" />) : (<Login></Login>)} />
+              <Route path="/Register"  element={tokenStatus ? (<Navigate to="/Profile" />) : (<Register></Register>)} />
               <Route path="/Cart" element={<Cart />} />
-              <Route path="/Pizza/p001" element={<Pizza />} />
-              <Route path="Profile" element={<Profile />} />
+              <Route path="/Pizza/:id" element={<Pizza />} />
+              <Route
+                path="/Profile"
+                element={tokenStatus ? (<Profile></Profile>) : ( <Navigate to="/login" />)}
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

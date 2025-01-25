@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { formatter } from "../utils/formatter";
 import { FcReading, FcPaid } from "react-icons/fc";
+import { Link } from "react-router";
 
 function CardPizza({ pizza }) {
-  const { currentCart, setCurrentCart } = useContext(CartContext); 
+  const { currentCart, setCurrentCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
     const getPizza = currentCart.find((item) => item.id === pizza.id);
@@ -50,12 +51,15 @@ function CardPizza({ pizza }) {
         </h6>
 
         <div className="flex justify-between gap-3 align-baseline">
-          <a
-            href="#"
-            className="gap-2 flex items-center p-2 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-          >
-            Ver más <FcReading />
-          </a>
+          <Link to={`/Pizza/${pizza.id}`}>
+            <button
+              href="#"
+              className="gap-2 flex items-center p-2 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+            >
+              Ver más <FcReading />
+            </button>
+          </Link>
+
           <button
             onClick={handleAddToCart}
             className="gap-2 flex items-center p-2 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
