@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { formatter } from "../utils/formatter";
 import { UserContext } from "../context/UserContext";
@@ -6,6 +6,27 @@ import { NavLink } from "react-router-dom";
 
 const Cart = () => {
   const { currentCart, setCurrentCart, total } = useContext(CartContext);
+  const { token, checkout } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    setMessage("");
+    try {
+      await checkout(currentCart);
+      setMessage("Compra realizada con éxito!");
+      alert(
+        `Compra exitosa!\nPizzas compradas:\n${currentCart
+          .map((pizza) => `- ${pizza.name} (${pizza.count})`)
+          .join("\n")}`
+      );
+      setCurrentCart([]);
+    } catch {
+      setMessage("Error al procesar la compra.");
+    }
+    setLoading(false);
+  };
 
   const handleAdd = (id) => {
     const updatedCart = currentCart.map((pizza) =>
@@ -22,7 +43,6 @@ const Cart = () => {
       .filter((pizza) => pizza.count > 0);
     setCurrentCart(updatedCart);
   };
-  const { tokenStatus } = useContext(UserContext);
 
   return (
     <div className="flex flex-col items-center text-green-700 font-medium p-3 m-5">
@@ -57,23 +77,22 @@ const Cart = () => {
         ))}
       </ul>
       <h1 className="text-green-700">Total del pedido: ${formatter(total)}</h1>
-      {tokenStatus ? (
-
-        <NavLink to="/checkout">
-          <button className="p-5 m-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-            Pagar
-          </button>
-        </NavLink>
-
+      {token ? (
+        <button
+          onClick={handleCheckout}
+          className="p-5 m-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          disabled={loading}
+        >
+          {loading ? "Procesando..." : "Pagar"}
+        </button>
       ) : (
-
         <NavLink to="/login">
-          <button className="p-5 m-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+          <button className="p-5 m-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg hover:bg-gray-100">
             Inicia sesión para pagar
           </button>
         </NavLink>
-
       )}
+      {message && <p className="text-white mt-4">{message}</p>}
     </div>
   );
 };

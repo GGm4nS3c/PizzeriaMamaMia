@@ -8,13 +8,11 @@ import ApicontextProvider from "./context/Apicontext.jsx";
 import UserContextProvider from "./context/UserContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <UserContextProvider>
-      <BrowserRouter>
-        <ApicontextProvider>
-          <App />
-        </ApicontextProvider>
-      </BrowserRouter>
-    </UserContextProvider>
-  </React.StrictMode>
+  <UserContextProvider>
+    <BrowserRouter>
+      <ApicontextProvider>
+        <App />
+      </ApicontextProvider>
+    </BrowserRouter>
+  </UserContextProvider>
 );

@@ -1,25 +1,27 @@
-export const validateFields = (email, pass1, pass2) => {
-    if (email === "" || pass1 === "" || pass2 === "") {
-      return "Faltan Datos en los campos";
-    }
-  
-    if (pass1 !== pass2) {
-      return "Las contraseñas no son iguales";
-    }
-  
-    if (pass1.length < 6) {
-      return "Las contraseñas no cumplen la longitud";
-    }
-  
-    return "Registro Exitoso";
-  };
-  
-  export const validateFieldsLogin = (email, pass) => {
-     if (email === "" || pass === "" ) {
-      return "Faltan datos en los campos";
-     }
-     if (pass.length < 6) {
-      return "Las contraseña no cumplen la longitud";
-    }
-     return true;
-   }
+export const validateFields = (email, password, confirmPassword) => {
+  if (email === "" || password === "" || confirmPassword === "") {
+    return "Faltan datos en los campos";
+  }
+
+  if (password !== confirmPassword) {
+    return "Las contraseñas no son iguales";
+  }
+
+  if (password.length < 6) {
+    return "Las contraseñas no cumplen la longitud mínima";
+  }
+
+  return true;
+};
+
+export const validateFieldsLogin = (email, password) => {
+  if (email === "" || password === "") {
+    return "Faltan datos en los campos";
+  }
+
+  if (password.length < 6) {
+    return "La contraseña no cumple la longitud mínima";
+  }
+
+  return true;
+};

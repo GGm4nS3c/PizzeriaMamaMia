@@ -12,32 +12,52 @@ import NotFound from "./pages/NotFound";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import CartProvider from "./context/CartContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/UserContext";
 
 function App() {
-  const {tokenStatus} = useContext(UserContext);
+  const { token } = useContext(UserContext);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
+  console.log(isAuthenticated); 
+  
+  useEffect(() => {
+    setIsAuthenticated(!!token);
+  }, [token]);
+
   return (
     <>
       <CartProvider>
         <div className="flex flex-col min-h-screen">
-          <Navbar></Navbar>
+          <Navbar />
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Login"  element={tokenStatus ? (<Navigate to="/Profile" />) : (<Login></Login>)} />
-              <Route path="/Register"  element={tokenStatus ? (<Navigate to="/Profile" />) : (<Register></Register>)} />
+              <Route
+                path="/Login"
+                element={
+                  isAuthenticated ? <Navigate to="/Profile" /> : <Login />
+                }
+              />
+              <Route
+                path="/Register"
+                element={
+                  isAuthenticated ? <Navigate to="/Profile" /> : <Register />
+                }
+              />
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Pizza/:id" element={<Pizza />} />
               <Route
                 path="/Profile"
-                element={tokenStatus ? (<Profile></Profile>) : ( <Navigate to="/login" />)}
+                element={
+                  isAuthenticated ? <Profile /> : <Navigate to="/login" />
+                }
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
-
-          <Footer></Footer>
+          <Footer />
         </div>
       </CartProvider>
     </>

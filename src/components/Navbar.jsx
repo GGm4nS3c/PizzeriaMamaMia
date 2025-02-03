@@ -10,7 +10,7 @@ import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
   const { total } = useContext(CartContext);
-  const {tokenStatus, logOut } = useContext(UserContext);
+  const { token, logout } = useContext(UserContext);
 
   return (
     <nav className=" bg-white border-gray-200 dark:bg-gray-800 m-1 rounded-lg ">
@@ -24,7 +24,7 @@ const Navbar = () => {
             </button>
           </NavLink>
 
-          {tokenStatus ? (
+          {token ? (
             <>
               <NavLink to="/Profile">
                 <button className="p-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -33,7 +33,7 @@ const Navbar = () => {
                 </button>
               </NavLink>
               <NavLink to="/">
-                <button onClick={logOut}
+                <button onClick={logout}
                 className="p-5 inline-flex items-center w-15 h-7 justify-center text-sm bg-gray-600 text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                   <IoMdLogOut />
                   logout
